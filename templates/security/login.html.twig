@@ -1,0 +1,45 @@
+{% block body %}
+<div class="container-fluid h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+        <div class="col-md-6">
+      <img src="{{ asset('img/header.jpg') }}" alt="Header Image" class="img-fluid" height="70px" height="70px">
+          <h1 class="h3 mb-3 font-weight-normal text-center">Log in to your account</h1>
+          <form class="form-signin" method="post">
+            {% if error %}
+              <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            {% if app.user %}
+              <div class="alert alert-success">You are already logged in.</div>
+            {% endif %}
+            <div class="form-label-group">
+            <label for="inputEmail">Email</label>
+              <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+            </div>
+            <div class="form-label-group">
+              <label for="inputPassword">Password</label>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+              </label>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+          </div>
+
+    </div>
+    
+  </div>
+</div>
+{% endblock %}
+
+
+
+

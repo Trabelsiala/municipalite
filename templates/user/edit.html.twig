@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<title>Edit User</title>
+
+{% block body %}
+    <h1>Edit User</h1>
+    <style>
+    h1 {
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    label {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+        border: 1px solid #ddd;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    select {
+        border: 1px solid #ddd;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    button[type="submit"] {
+        background-color: #007bff;
+        border: none;
+        border-radius: 0.25rem;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        text-transform: uppercase;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0069d9;
+    }
+</style>
+    {{ include('user/_form.html.twig') }}
+
+    <a href="{{ path('app_user_index') }}">back to list</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

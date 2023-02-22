@@ -12,7 +12,8 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-<!DOCTYPE html>
+{% block head %}
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,6 +21,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+{% endblock %}
+
+
   {% block titre %} <title> MUNICIPALITE DE TUNIS  </title> {% endblock %}
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -51,7 +55,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="./pages/dashboard.html">
+          <a class="nav-link active" href="http://127.0.0.1:8000/user/">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
             </div>
@@ -133,7 +137,93 @@
     {%endblock%}
     <!-- End Navbar -->
     {% block container%}
+ <title>User index</title>
+<style>
+    h1 {
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
 
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .btn {
+        background-color: #007bff;
+        border: none;
+        border-radius: 0.25rem;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        text-transform: uppercase;
+    }
+
+    .btn:hover {
+        background-color: #0069d9;
+    }
+</style>
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Nom_Util</th>
+                <th>Prenom_Util</th>
+                <th>Tel</th>
+                <th>Adresse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{user.roles}}</td>
+                <td>{{ user.nomUtil }}</td>
+                <td>{{ user.prenomUtil }}</td>
+                <td>{{ user.tel }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_new') }}">Create new</a>
 
 
 

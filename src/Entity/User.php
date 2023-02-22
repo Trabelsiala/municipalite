@@ -22,7 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private array $roles = [];
+    private ?string $roles = null;
 
     /**
      * @var string The hashed password
@@ -56,6 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Reservation::class)]
     private Collection $reservations;
+    
 
     public function __construct()
     {
@@ -65,6 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->Documents = new ArrayCollection();
         $this->reservations = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -104,16 +106,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles(): ?string
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(string $roles): self
     {
         $this->roles = $roles;
 
